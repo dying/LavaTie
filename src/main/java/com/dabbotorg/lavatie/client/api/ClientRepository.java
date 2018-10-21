@@ -1,6 +1,6 @@
 package com.dabbotorg.lavatie.client.api;
 
-import com.dabbotorg.lavatie.commons.Repository;
+import com.dabbotorg.lavatie.commons.data.Repository;
 
 import java.util.List;
 

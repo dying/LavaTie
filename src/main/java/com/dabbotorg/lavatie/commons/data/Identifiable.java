@@ -1,4 +1,4 @@
-package com.dabbotorg.lavatie.commons;
+package com.dabbotorg.lavatie.commons.data;
 
 public interface Identifiable {
 

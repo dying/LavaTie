@@ -1,6 +1,6 @@
 package com.dabbotorg.lavatie.player.api;
 
-import com.dabbotorg.lavatie.commons.Identifiable;
+import com.dabbotorg.lavatie.commons.data.Identifiable;
 import com.sedmelluq.discord.lavaplayer.filter.PcmFilterFactory;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;

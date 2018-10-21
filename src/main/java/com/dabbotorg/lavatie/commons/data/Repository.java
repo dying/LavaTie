@@ -1,4 +1,6 @@
-package com.dabbotorg.lavatie.commons;
+package com.dabbotorg.lavatie.commons.data;
+
+import com.dabbotorg.lavatie.commons.data.Identifiable;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.dabbotorg.lavatie.client.api;
 
-import com.dabbotorg.lavatie.commons.Identifiable;
+import com.dabbotorg.lavatie.commons.data.Identifiable;
 import lombok.*;
 import org.springframework.cache.annotation.Cacheable;
 
