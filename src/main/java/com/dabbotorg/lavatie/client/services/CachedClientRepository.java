@@ -2,14 +2,15 @@ package com.dabbotorg.lavatie.client.services;
 
 import com.dabbotorg.lavatie.client.api.Client;
 import com.dabbotorg.lavatie.client.api.ClientRepository;
-import lombok.Data;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
 import javax.ws.rs.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Cacheable
@@ -19,37 +20,42 @@ public class CachedClientRepository implements ClientRepository {
     private List<Client> clients = new ArrayList<>();
 
     @Override
-    public Client findOneByPath(String path) {
-        return (Client) Optional.of(clients.stream().filter(c -> c.path.equals(path))).orElseThrow(NotFoundException::new);
+    @NonNull
+    public Client findOneByPath(String path) throws NotFoundException {
+        return clients.stream().filter(c -> Objects.equals(c.path, path)).findFirst().orElseThrow(NotFoundException::new);
     }
 
     @Override
+    @NonNull
     public List<? extends Client> findAllByPath(String path, boolean startsWith) {
-        return Optional.of(clients.stream().filter(c -> c.path == path).collect(Collectors.toList())).orElse(new ArrayList<>());
+        return clients.stream().filter(c -> Objects.equals(c.path, path)).collect(Collectors.toList());
     }
 
     @Override
+    @Nullable
     public Client findOrNull(long id) {
-        return (Client) Optional.of(clients.stream().filter(c -> c.id == id)).orElse(null);
+        return clients.stream().filter(c -> Objects.equals(c.id, id)).findFirst().orElse(null);
     }
 
     @Override
+    @NonNull
     public List<? extends Client> findAll() {
-        return clients;
+        return new ArrayList<>(clients); // making a copy simulates the rest, enforcing encapsulation
     }
 
     @Override
-    public List<? extends Client> findAll(List<Long> ids) {
-        return Optional.of(clients.stream().filter(c -> ids.contains(c.id)).collect(Collectors.toList())).orElse(new ArrayList<>());
+    @NonNull
+    public List<? extends Client> findAll(@NonNull List<Long> ids) {
+        return clients.stream().filter(c -> ids.contains(c.id)).collect(Collectors.toList());
     }
 
     @Override
-    public boolean delete(Client client) {
+    public boolean delete(@Nullable Client client) {
         return clients.remove(client);
     }
 
     @Override
-    public boolean add(Client client) {
+    public boolean add(@NonNull Client client) {
         return clients.add(client);
     }
 }
