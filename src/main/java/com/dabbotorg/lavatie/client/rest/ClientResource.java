@@ -20,6 +20,11 @@ public class ClientResource {
     @Autowired private ClientConverter converter;
     @Autowired private ResourceHelper helper;
 
+    /**
+     *
+     * @param ids List of client IDs
+     * @return Empty or ClientRepresentation[]
+     */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ClientRepresentation> findAll(@RequestParam(value = "ids[]", required = false) List<Long> ids) {
         if(ids != null) {
