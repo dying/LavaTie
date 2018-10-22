@@ -1,6 +1,7 @@
 package com.dabbotorg.lavatie;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +18,7 @@ import org.springframework.scheduling.support.TaskUtils;
 @EnableAsync(proxyTargetClass = true)
 @EnableScheduling
 @EnableAutoConfiguration
-@ComponentScan({ "com.dabbotorg.lavatie"})
-public class ApplicationConfig {
+public class AppConfig {
     @Bean(name = "asyncTaskScheduler")
     public TaskScheduler createTaskScheduler() {
         ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();

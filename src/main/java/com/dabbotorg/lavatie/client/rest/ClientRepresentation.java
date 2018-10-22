@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @Data @EqualsAndHashCode
 @JsonTypeName("Client")
-@JsonTypeInfo(property = "_type", include = JsonTypeInfo.As.PROPERTY, use = JsonTypeInfo.Id.NAME)
+@JsonTypeInfo(property = "_type", use = JsonTypeInfo.Id.NAME)
 public class ClientRepresentation {
     private long id;
     private String path;

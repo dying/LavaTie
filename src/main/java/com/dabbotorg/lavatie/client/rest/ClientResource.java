@@ -2,6 +2,7 @@ package com.dabbotorg.lavatie.client.rest;
 
 import com.dabbotorg.lavatie.client.services.CachedClientRepository;
 import com.dabbotorg.lavatie.commons.rest.ResourceHelper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ClientResource {
     @Autowired private CachedClientRepository clientRepository;
     @Autowired private ClientConverter converter;
+    @Autowired private ObjectMapper objectMapper;
     @Autowired private ResourceHelper helper;
 
     @GET
