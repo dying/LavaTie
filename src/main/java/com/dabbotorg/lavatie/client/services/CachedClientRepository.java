@@ -7,7 +7,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
-import javax.ws.rs.NotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,8 +21,8 @@ public class CachedClientRepository implements ClientRepository {
 
     @Override
     @NonNull
-    public Client findOneByPath(String path) throws NotFoundException {
-        return clients.stream().filter(c -> Objects.equals(c.path, path)).findFirst().orElseThrow(NotFoundException::new);
+    public Client findOneByPath(String path) throws IOException {
+        return clients.stream().filter(c -> Objects.equals(c.path, path)).findFirst().orElseThrow(IOException::new);
     }
 
     @Override
