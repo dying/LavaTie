@@ -12,13 +12,14 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
 public class CachedClientRepository implements ClientRepository {
 
-    private List<Client> clients = new ArrayList<>();
+    private ArrayList<Client> clients;
 
     @Override
     @NonNull
@@ -50,13 +51,37 @@ public class CachedClientRepository implements ClientRepository {
         return clients.stream().filter(c -> ids.contains(c.id)).collect(Collectors.toList());
     }
 
+    // TODO: remove lazy code, remove try/catch and make it actually good
     @Override
-    public boolean delete(@Nullable Client client) {
-        return clients.remove(client);
+    public boolean delete(@Nullable long id) {
+        try {
+            return clients.remove(clients.stream().filter(c -> Objects.equals(c.id, id)).findFirst().orElseThrow(IOException::new));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
+    // TODO: remove lazy code, remove try/catch and make it actually good
     @Override
-    public boolean add(@NonNull Client client) {
-        return clients.add(client);
+    public Client update(@NonNull Client client) {
+        try {
+            return clients.stream().filter(c -> Objects.equals(c.id, client.id)).findFirst().orElseThrow(IOException::new);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return client;
+    }
+
+    // TODO: remove lazy code, remove try/catch and make it actually good
+    @Override
+    public Client add(@NonNull Client client) {
+        try {
+            clients.add(client);
+            return client;
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return client;
     }
 }
