@@ -4,12 +4,10 @@ import com.dabbotorg.lavatie.client.services.CachedClientRepository;
 import com.dabbotorg.lavatie.commons.rest.ResourceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,5 +31,15 @@ public class ClientResource {
         else {
             return helper.convertAll(converter, clientRepository.findAll());
         }
+    }
+
+    /**
+     *
+     * Creates a ClientRepresentation
+     * @return Created ClientRepresentation
+     */
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ClientRepresentation add(@Valid final ClientRepresentation representation) {
+        return helper.create(clientRepository, converter, representation);
     }
 }
