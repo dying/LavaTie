@@ -4,11 +4,11 @@ Standalone HTTP based audio sending node based on Lavaplayer.
 
 Being used in production by dabBot.
 
-A no-bullshit approach to audio nodes. Where Lavalink quickly loses track of its actual scope, LavaTie sticks to what it really needs to do.
-Name inspired by Lavalink.
-No built-in metrics through Prometheus because that's out of scope.
-No built-in statistics because that's out of scope, use our API to collect your own statistics.
-No active connection requirements and no surprises, LavaTie takes care of itself like a big boy.
+A no-bullshit approach to audio nodes. Where Lavalink quickly loses track of its actual scope, LavaTie sticks to what it really needs to do.  
+Name inspired by Lavalink.  
+No built-in metrics through Prometheus because that's out of scope.  
+No built-in statistics because that's out of scope, use our API to collect your own statistics.  
+No active connection requirements and no surprises, LavaTie takes care of itself like a big boy.  
 
 
 ## Features
