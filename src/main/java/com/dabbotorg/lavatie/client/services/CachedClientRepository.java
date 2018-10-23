@@ -2,24 +2,20 @@ package com.dabbotorg.lavatie.client.services;
 
 import com.dabbotorg.lavatie.client.api.Client;
 import com.dabbotorg.lavatie.client.api.ClientRepository;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
 public class CachedClientRepository implements ClientRepository {
 
-    private ArrayList<Client> clients;
+    private ArrayList<Client> clients = new ArrayList<>();
 
     @Override
     @NonNull

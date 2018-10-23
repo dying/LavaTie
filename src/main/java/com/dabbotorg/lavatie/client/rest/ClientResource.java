@@ -1,6 +1,8 @@
 package com.dabbotorg.lavatie.client.rest;
 
+import com.dabbotorg.lavatie.client.api.Client;
 import com.dabbotorg.lavatie.client.services.CachedClientRepository;
+import com.dabbotorg.lavatie.client.services.NoClientsException;
 import com.dabbotorg.lavatie.commons.rest.ResourceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,14 +26,18 @@ public class ClientResource {
      * @param ids List of client IDs
      * @return Empty or ClientRepresentation[]
      */
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ClientRepresentation> findAll(@RequestParam(value = "ids[]", required = false) List<Long> ids) {
+    @GetMapping(produces = "application/json")
+    public List<ClientRepresentation> findAll(@RequestParam(value = "ids[]", required = false) List<Long> ids) throws NoClientsException {
+        List<ClientRepresentation> clients;
         if(ids != null) {
-            return helper.convertAll(converter, clientRepository.findAll(ids));
+            clients = helper.convertAll(converter, clientRepository.findAll(ids));
         }
         else {
-            return helper.convertAll(converter, clientRepository.findAll());
+            clients = helper.convertAll(converter, clientRepository.findAll());
         }
+
+        if(clients.isEmpty()) { throw new NoClientsException(); }
+        return clients;
     }
 
     /**
@@ -38,7 +45,7 @@ public class ClientResource {
      * Creates a ClientRepresentation
      * @return Created ClientRepresentation
      */
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = "application/json")
     public ClientRepresentation add(@Valid final ClientRepresentation representation) {
         return helper.create(clientRepository, converter, representation);
     }
